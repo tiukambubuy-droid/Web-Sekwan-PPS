@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\MenuItemController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\BeritaController;
 use App\Models\Page;
 
 /*
@@ -60,5 +61,17 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('menu-items', MenuItemController::class);
     Route::resource('pages', PageController::class);
 
+});
+
+/*
+|--------------------------------------------------------------------------
+| UNTUK INPUT BERITA DARI ADMIN
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::get('/berita', [BeritaController::class, 'index'])->name('admin.berita.index');
+    Route::get('/berita/create', [BeritaController::class, 'create'])->name('admin.berita.create');
+    Route::post('/berita', [BeritaController::class, 'store'])->name('admin.berita.store');
 });
 

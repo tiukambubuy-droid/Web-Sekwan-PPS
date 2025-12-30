@@ -187,6 +187,7 @@
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
+            margin-left: 150px;
         }
 
         .btn-primary:hover {
@@ -261,6 +262,28 @@
             font-size: 13px;
             color: #6b7280;
         }
+
+        .tag-checkbox {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .tag-item {
+            display: flex;
+            align-items: center;
+            /* 🔑 bikin sejajar */
+            gap: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .tag-item input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -276,7 +299,7 @@
             </div>
 
             <a href="{{ route('admin.dashboard') }}">🏠 Dashboard</a>
-            <a href="#">📰 Berita</a>
+            <a href="{{ route('admin.berita.index') }}">📰 Berita</a>
             <a href="#">📅 Agenda</a>
             <a href="#">📁 Dokumen</a>
             <a href="#">🖼️ Galeri</a>
