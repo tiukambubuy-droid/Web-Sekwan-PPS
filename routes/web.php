@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\MenuItemController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\BeritaController;
+use App\Http\Controllers\Admin\InformasiController;
 use App\Models\Page;
 
 /*
@@ -14,7 +15,8 @@ use App\Models\Page;
 | PUBLIC
 |--------------------------------------------------------------------------
 */
-Route::view('/', 'pages.home')->name('home');
+
+Route::view('/', 'home')->name('home');
 
 /*
 |--------------------------------------------------------------------------
@@ -27,51 +29,49 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])->name('admin.log
 
 /*
 |--------------------------------------------------------------------------
-| ADMIN
+| ADMIN AREA
 |--------------------------------------------------------------------------
 */
-Route::middleware('auth')->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::prefix('admin')->middleware('auth')->group(function () {
+
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('admin.dashboard');
+
+    /*
+    |--------------------------------------------------------------------------
+    | INFORMASI (HALAMAN HUB)
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/informasi', [InformasiController::class, 'index'])
+        ->name('admin.informasi.index');
+
+    /*
+    |--------------------------------------------------------------------------
+    | BERITA (CRUD FULL – DALAM INFORMASI)
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('informasi')->name('admin.informasi.')->group(function () {
+        Route::resource('berita', BeritaController::class)
+            ->parameters(['berita' => 'berita']);
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | MENU DINAMIS
+    |--------------------------------------------------------------------------
+    */
+    Route::resource('menus', MenuController::class);
+    Route::resource('menu-items', MenuItemController::class);
+    Route::resource('pages', PageController::class);
 });
 
 /*
 |--------------------------------------------------------------------------
-| UNTUK MENU NAVBAR DINAMIS
+| FRONTEND DINAMIS PAGE
 |--------------------------------------------------------------------------
 */
-
 Route::get('/{slug}', function ($slug) {
     $page = Page::where('slug', $slug)->firstOrFail();
     return view('pages.dynamic', compact('page'));
 });
-
-/*
-|--------------------------------------------------------------------------
-| UNTUK INPUT MENU NAVBAR DINAMIS DI DASHBOARD ADMIN
-|--------------------------------------------------------------------------
-*/
-
-Route::prefix('admin')->middleware('auth')->group(function () {
-
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
-
-    Route::resource('menus', MenuController::class);
-    Route::resource('menu-items', MenuItemController::class);
-    Route::resource('pages', PageController::class);
-
-});
-
-/*
-|--------------------------------------------------------------------------
-| UNTUK INPUT BERITA DARI ADMIN
-|--------------------------------------------------------------------------
-*/
-
-Route::middleware('auth')->prefix('admin')->group(function () {
-    Route::get('/berita', [BeritaController::class, 'index'])->name('admin.berita.index');
-    Route::get('/berita/create', [BeritaController::class, 'create'])->name('admin.berita.create');
-    Route::post('/berita', [BeritaController::class, 'store'])->name('admin.berita.store');
-});
-

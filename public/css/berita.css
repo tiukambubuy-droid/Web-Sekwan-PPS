@@ -1,0 +1,132 @@
+/* =========================
+   TABEL BERITA (ADMIN)
+========================= */
+
+.table-berita {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed;
+}
+
+/* HEADER */
+.table-berita thead th {
+    background: #f1f5f9;
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+/* BODY */
+.table-berita tbody td {
+    padding: 14px 16px;
+    font-size: 14px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+/* === KOLOM === */
+
+/* Thumbnail */
+.table-berita th:nth-child(1),
+.table-berita td:nth-child(1) {
+    width: 120px;
+    text-align: center;
+}
+
+/* Judul */
+.table-berita th:nth-child(2),
+.table-berita td:nth-child(2) {
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* Status */
+.table-berita th:nth-child(3),
+.table-berita td:nth-child(3) {
+    width: 120px;
+    text-align: center;
+}
+
+/* Tanggal */
+.table-berita th:nth-child(4),
+.table-berita td:nth-child(4) {
+    width: 150px;
+    text-align: center;
+}
+
+/* Thumbnail image */
+.thumb-cell img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+}
+
+/* Status badge */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 12px;
+    border-radius: 999px;
+    text-transform: capitalize;
+    line-height: 1.4;
+}
+
+.badge-draft {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.badge-published {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.text-muted {
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+
+/* =========================
+   AKSI (EDIT & DELETE)
+========================= */
+
+.action-cell {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.btn-action {
+    display: inline-block;
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0 2px;
+}
+
+.btn-edit {
+    background: #e0f2fe;
+    color: #075985;
+}
+
+.btn-edit:hover {
+    background: #bae6fd;
+}
+
+.btn-delete {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.btn-delete:hover {
+    background: #fecaca;
+}

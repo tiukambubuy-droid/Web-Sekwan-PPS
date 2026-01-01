@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Dashboard Admin - Sekwan PPS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    @stack('styles')
     <style>
         * {
             margin: 0;
@@ -284,11 +284,33 @@
             height: 16px;
             cursor: pointer;
         }
+
+        .form-group input[type="file"] {
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: #fff;
+        }
+
+        .form-hint {
+            display: block;
+            margin-top: 4px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .ck-editor__editable {
+            min-height: 300px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 
-<body>
+@stack('scripts')
 
+
+<body>
     <div class="wrapper">
 
         <!-- SIDEBAR -->
@@ -299,7 +321,7 @@
             </div>
 
             <a href="{{ route('admin.dashboard') }}">🏠 Dashboard</a>
-            <a href="{{ route('admin.berita.index') }}">📰 Berita</a>
+            <a href="{{ route('admin.informasi.index') }}">📄 Informasi</a>
             <a href="#">📅 Agenda</a>
             <a href="#">📁 Dokumen</a>
             <a href="#">🖼️ Galeri</a>
@@ -327,7 +349,8 @@
         </div>
 
     </div>
-
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    
 </body>
 
 </html>
