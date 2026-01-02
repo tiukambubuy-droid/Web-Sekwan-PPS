@@ -7,6 +7,9 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\MenuItemController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\BeritaController;
+use App\Http\Controllers\Admin\PengumumanController;
+use App\Http\Controllers\Admin\AgendaController;
+use App\Http\Controllers\Admin\InfografisController;
 use App\Http\Controllers\Admin\InformasiController;
 use App\Models\Page;
 
@@ -15,7 +18,6 @@ use App\Models\Page;
 | PUBLIC
 |--------------------------------------------------------------------------
 */
-
 Route::view('/', 'home')->name('home');
 
 /*
@@ -48,12 +50,26 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | BERITA (CRUD FULL – DALAM INFORMASI)
+    | INFORMASI - MODULES
     |--------------------------------------------------------------------------
     */
     Route::prefix('informasi')->name('admin.informasi.')->group(function () {
+
+        // 1️⃣ Berita
         Route::resource('berita', BeritaController::class)
             ->parameters(['berita' => 'berita']);
+
+        // 2️⃣ Pengumuman
+        Route::resource('pengumuman', PengumumanController::class)
+            ->parameters(['pengumuman' => 'pengumuman']);
+
+        // 3️⃣ Agenda
+        Route::resource('agenda', AgendaController::class)
+            ->parameters(['agenda' => 'agenda']);
+
+        // 4️⃣ Infografis
+        Route::resource('infografis', InfografisController::class)
+            ->parameters(['infografis' => 'infografis']);
     });
 
     /*

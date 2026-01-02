@@ -22,7 +22,7 @@
         </a>
 
         <!-- Pengumuman -->
-        <a href="#" class="info-card disabled">
+        <a href="{{ route('admin.informasi.pengumuman.index') }}" class="info-card">
             <div class="info-icon">📢</div>
             <div class="info-content">
                 <h3>Pengumuman</h3>
