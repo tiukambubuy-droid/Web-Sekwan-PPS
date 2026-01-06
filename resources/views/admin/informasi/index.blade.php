@@ -31,7 +31,7 @@
         </a>
 
         <!-- Agenda -->
-        <a href="#" class="info-card disabled">
+        <a href="{{ route('admin.informasi.agenda.index') }}" class="info-card">
             <div class="info-icon">📅</div>
             <div class="info-content">
                 <h3>Agenda</h3>
