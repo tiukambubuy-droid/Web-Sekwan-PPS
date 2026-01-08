@@ -1,5 +1,9 @@
 @extends('admin.layouts.app')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/agenda.css') }}">
+@endpush
+
 @section('content')
 <div class="form-card">
     <h2>Edit Agenda</h2>

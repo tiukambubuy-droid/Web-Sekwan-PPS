@@ -1,0 +1,256 @@
+/* =========================
+   INFOGRAFIS MODULE (UPGRADE)
+   ========================= */
+
+/* Wrapper */
+.infografis-wrapper {
+    max-width: 100%;
+    background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+    padding: 28px 32px;
+    border-radius: 14px;
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.06),
+        0 2px 6px rgba(0, 0, 0, 0.04);
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Subtle animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Title */
+.infografis-wrapper h4 {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #1f2937;
+    position: relative;
+}
+
+.infografis-wrapper h4::after {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+    border-radius: 2px;
+    margin-top: 6px;
+}
+
+/* =========================
+   FORM
+   ========================= */
+
+.infografis-form .form-group {
+    margin-bottom: 18px;
+}
+
+.infografis-form label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+    color: #374151;
+    font-size: 14px;
+}
+
+.infografis-form input[type="text"],
+.infografis-form textarea,
+.infografis-form select,
+.infografis-form input[type="file"] {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    background: #ffffff;
+    font-size: 14px;
+    transition: all 0.25s ease;
+}
+
+.infografis-form textarea {
+    resize: vertical;
+}
+
+.infografis-form input:focus,
+.infografis-form textarea:focus,
+.infografis-form select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* =========================
+   ACTION BUTTONS
+   ========================= */
+
+.infografis-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0px;
+    margin-top: 24px;
+}
+
+.infografis-actions .btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.25s ease;
+}
+
+.infografis-actions .btn-primary {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    border: none;
+}
+
+.infografis-actions .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(37, 99, 235, 0.35);
+}
+
+.infografis-actions .btn-secondary {
+    background: #e5e7eb;
+    color: #374151;
+    border: none;
+}
+
+.infografis-actions .btn-secondary:hover {
+    background: #d1d5db;
+}
+
+/* =========================
+   TABLE (INDEX)
+   ========================= */
+
+.infografis-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 18px;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.infografis-table th {
+    background: #f1f5f9;
+    padding: 14px;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #475569;
+}
+
+.infografis-table td {
+    padding: 14px;
+    border-top: 1px solid #e5e7eb;
+    font-size: 14px;
+    color: #1f2937;
+}
+
+.infografis-table tr:hover td {
+    background: #f9fafb;
+}
+
+/* Status badge */
+.infografis-table .badge {
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* =========================
+   IMAGE GRID (EDIT)
+   ========================= */
+
+.infografis-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 18px;
+    margin-top: 22px;
+}
+
+.infografis-image-card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.infografis-image-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.12);
+}
+
+.infografis-image-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.infografis-image-card .card-footer {
+    padding: 10px;
+    text-align: center;
+    background: #f8fafc;
+}
+
+
+/* =========================
+   ACTION BUTTONS (INDEX)
+   ========================= */
+
+.infografis-actions-inline {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.infografis-actions-inline .btn {
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.infografis-actions-inline .btn-edit {
+    background: #facc15;
+    color: #1f2937;
+    border: none;
+}
+
+.infografis-actions-inline .btn-edit:hover {
+    background: #eab308;
+}
+
+.infografis-actions-inline .btn-delete {
+    background: #ef4444;
+    color: #fff;
+    border: none;
+}
+
+.infografis-actions-inline .btn-delete:hover {
+    background: #dc2626;
+}
+
+
+/* =========================
+   THUMBNAIL (INDEX)
+   ========================= */
+
+.infografis-thumb {
+    width: 60px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}

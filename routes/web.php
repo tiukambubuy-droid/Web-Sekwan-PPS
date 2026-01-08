@@ -18,6 +18,7 @@ use App\Models\Page;
 | PUBLIC
 |--------------------------------------------------------------------------
 */
+
 Route::view('/', 'home')->name('home');
 
 /*
@@ -70,6 +71,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         // 4️⃣ Infografis
         Route::resource('infografis', InfografisController::class)
             ->parameters(['infografis' => 'infografis']);
+
+        // Infografis - Image Management
+        Route::delete(
+            'infografis/image/{image}',
+            [InfografisController::class, 'destroyImage']
+        )->name('infografis.image.destroy');
     });
 
     /*

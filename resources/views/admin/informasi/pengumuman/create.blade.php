@@ -1,5 +1,6 @@
 @extends('admin.layouts.app')
 
+
 @section('content')
 <div class="form-card">
     <h2>Tambah Pengumuman</h2>

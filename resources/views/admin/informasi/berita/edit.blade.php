@@ -1,5 +1,9 @@
 @extends('admin.layouts.app')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('css/berita.css') }}">
+@endpush
+
 @section('content')
 <div class="form-card">
     <h2>Edit Berita</h2>
