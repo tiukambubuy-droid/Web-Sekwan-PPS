@@ -1,62 +1,76 @@
 @extends('admin.layouts.app')
 
-@push('styles')
-<link rel="stylesheet" href="{{ asset('css/berita.css') }}">
-@endpush
-
 @section('content')
 <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;">
+
+    {{-- HEADER --}}
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <h2>Data Pengumuman</h2>
-        <a href="{{ route('admin.informasi.pengumuman.create') }}" class="btn-primary">
+        <a href="{{ route('admin.informasi.pengumuman.create') }}"
+           class="btn btn-primary">
             + Tambah Pengumuman
         </a>
     </div>
 
-    <table class="table-berita">
+    {{-- TABLE --}}
+    <table>
         <thead>
             <tr>
                 <th>Thumbnail</th>
                 <th>Judul</th>
                 <th>Status</th>
                 <th>Tanggal</th>
-                <th style="width:140px;">Aksi</th>
+                <th>Aksi</th>
             </tr>
         </thead>
+
         <tbody>
             @forelse($pengumumans as $item)
             <tr>
-                <td class="thumb-cell">
+                {{-- THUMBNAIL --}}
+                <td style="text-align:center;">
                     @if($item->images->count())
-                    <img
-                        src="{{ asset('storage/' . $item->images->first()->image_path) }}"
-                        style="width:80px;height:60px;object-fit:cover;border-radius:6px;">
+                        <img
+                            src="{{ asset('storage/'.$item->images->first()->image_path) }}"
+                            class="table-thumb"
+                            alt="Thumbnail">
                     @else
-                    <span class="text-muted">Tidak ada</span>
+                        <span class="text-muted">Tidak ada</span>
                     @endif
                 </td>
 
+                {{-- JUDUL --}}
                 <td>{{ $item->title }}</td>
 
+                {{-- STATUS --}}
                 <td>
                     <span class="badge badge-{{ $item->status }}">
                         {{ ucfirst($item->status) }}
                     </span>
                 </td>
 
+                {{-- TANGGAL --}}
                 <td>{{ $item->created_at->format('d M Y') }}</td>
 
+                {{-- AKSI --}}
                 <td>
-                    <a href="{{ route('admin.informasi.pengumuman.edit', $item->id) }}" class="btn-edit">Edit</a>
+                    <div class="action-group">
+                        <a href="{{ route('admin.informasi.pengumuman.edit', $item->id) }}"
+                           class="btn btn-secondary btn-sm">
+                            Edit
+                        </a>
 
-                    <form action="{{ route('admin.informasi.pengumuman.destroy', $item->id) }}"
-                        method="POST"
-                        style="display:inline"
-                        onsubmit="return confirm('Yakin hapus pengumuman ini?')">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn-delete">Hapus</button>
-                    </form>
+                        <form action="{{ route('admin.informasi.pengumuman.destroy', $item->id) }}"
+                              method="POST"
+                              onsubmit="return confirm('Yakin hapus pengumuman ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                    class="btn btn-danger btn-sm">
+                                Hapus
+                            </button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             @empty
@@ -66,8 +80,8 @@
                 </td>
             </tr>
             @endforelse
-
         </tbody>
     </table>
+
 </div>
 @endsection

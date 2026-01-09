@@ -1,74 +1,86 @@
 @extends('admin.layouts.app')
 
-@push('styles')
-<link rel="stylesheet" href="{{ asset('css/berita.css') }}">
-@endpush
-
-
-
 @section('content')
 <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;">
+
+    {{-- HEADER --}}
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <h2>Data Berita</h2>
-        <a href="{{ route('admin.informasi.berita.create') }}" class="btn-primary">+ Tambah Berita</a>
+        <a href="{{ route('admin.informasi.berita.create') }}"
+            class="btn btn-primary">
+            + Tambah Berita
+        </a>
     </div>
 
-    <table class="table-berita">
-    <thead>
-        <tr>
-            <th>Thumbnail</th>
-            <th>Judul</th>
-            <th>Status</th>
-            <th>Tanggal</th>
-            <th style="width:120px; text-align:center;">Aksi</th>
-        </tr>
-    </thead>
+    {{-- TABLE --}}
+    <table>
+        <thead>
+            <tr>
+                <th>Thumbnail</th>
+                <th>Judul</th>
+                <th>Status</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
 
-    <tbody>
-        @foreach($beritas as $berita)
-        <tr>
-            <td class="thumb-cell">
-                @if($berita->thumbnail)
-                    <img src="{{ asset('storage/' . $berita->thumbnail) }}" alt="thumbnail">
-                @else
+        <tbody>
+            @forelse($beritas as $berita)
+            <tr>
+                {{-- Thumbnail --}}
+                <td>
+                    @if($berita->thumbnail)
+                    <img src="{{ asset('storage/'.$berita->thumbnail) }}"
+                        class="table-thumb"
+                        alt="Thumbnail">
+                    @else
                     <span class="text-muted">Tidak ada</span>
-                @endif
-            </td>
+                    @endif
+                </td>
 
-            <td class="title-cell">{{ $berita->title }}</td>
+                {{-- Judul --}}
+                <td>{{ $berita->title }}</td>
 
-            <td>
-                <span class="badge badge-{{ $berita->status }}">
-                    {{ ucfirst($berita->status) }}
-                </span>
-            </td>
+                {{-- Status --}}
+                <td>
+                    <span class="badge badge-{{ $berita->status }}">
+                        {{ ucfirst($berita->status) }}
+                    </span>
+                </td>
 
-            <td class="date-cell">
-                {{ $berita->created_at->format('d M Y') }}
-            </td>
+                {{-- Tanggal --}}
+                <td>{{ $berita->created_at->format('d M Y') }}</td>
 
-            {{-- 🔥 AKSI --}}
-            <td class="action-cell">
-                <a href="{{ route('admin.informasi.berita.edit', $berita->id) }}"
-                   class="btn-action btn-edit">
-                    Edit
-                </a>
+                {{-- Aksi --}}
+                <td>
+                    <div class="action-group">
+                        <a href="{{ route('admin.informasi.berita.edit', $berita->id) }}"
+                            class="btn btn-secondary btn-sm">
+                            Edit
+                        </a>
 
-                <form action="{{ route('admin.informasi.berita.destroy', $berita->id) }}"
-                      method="POST"
-                      onsubmit="return confirm('Yakin hapus berita ini?')"
-                      style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn-action btn-delete">
-                        Hapus
-                    </button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+                        <form action="{{ route('admin.informasi.berita.destroy', $berita->id) }}"
+                            method="POST"
+                            onsubmit="return confirm('Yakin hapus berita ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="btn btn-danger btn-sm">
+                                Hapus
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="5" style="text-align:center;color:#6b7280;padding:20px;">
+                    Belum ada data berita
+                </td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
 
 </div>
 @endsection

@@ -74,8 +74,8 @@
             <label>Pin Lokasi di Peta (Opsional)</label>
 
             <div id="map"
-                data-lat="{{ $agenda->latitude }}"
-                data-lng="{{ $agenda->longitude }}"
+                data-lat="{{ $agenda->latitude ?? -8.49 }}"
+                data-lng="{{ $agenda->longitude ?? 140.40 }}"
                 style="height:300px;border-radius:8px;border:1px solid #e5e7eb;">
             </div>
 
@@ -135,23 +135,31 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        let map = L.map('map').setView([-8.49, 140.40], 13);
-        let marker;
+document.addEventListener('DOMContentLoaded', function () {
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap'
-        }).addTo(map);
+    const mapEl = document.getElementById('map');
 
-        map.on('click', function(e) {
-            if (marker) map.removeLayer(marker);
+    const lat = parseFloat(mapEl.dataset.lat);
+    const lng = parseFloat(mapEl.dataset.lng);
 
-            marker = L.marker(e.latlng).addTo(map);
+    const map = L.map('map').setView([lat, lng], 50);
 
-            document.getElementById('latitude').value = e.latlng.lat;
-            document.getElementById('longitude').value = e.latlng.lng;
-        });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+        maxZoom: 18
+    }).addTo(map);
+
+    let marker = L.marker([lat, lng]).addTo(map);
+
+    map.on('click', function (e) {
+        marker.setLatLng(e.latlng);
+
+        document.getElementById('latitude').value = e.latlng.lat;
+        document.getElementById('longitude').value = e.latlng.lng;
     });
+
+});
 </script>
+
 @endpush
 @endsection
